@@ -14,19 +14,27 @@ public class Check_Pair
 			arr[i] = sc.nextInt();
 		
 		Map<Integer, Integer> map = new HashMap<>();
-		map.put(0, 1);
 		for(int i = 0; i < n; i++)
 		{
 			if(map.containsKey(k - arr[i]))
 			{
 				System.out.println("Item found "+i);
-				return;
+				
 			}
-			else
 				map.put(arr[i], 1);
 		}
-		System.out.println("Not found");		
+		System.out.println("Not found");	
 		
 		sc.close();
 	}
 }
+
+/*
+ * 
+ *
+Output: 
+	
+6 17
+1 4 45 6 10 8
+
+*/
