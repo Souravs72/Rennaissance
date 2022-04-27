@@ -27,7 +27,6 @@ public class CountOfSubArrays
 				map.put(psum, map.get(psum) + 1);
 			else
 				map.put(psum, 1);
-			
 		}
 		System.out.println(count);
 	}
