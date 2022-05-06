@@ -34,9 +34,10 @@ public class LinkedList
 			Node tmp = head;
 			while(tmp!= null)
 			{
-				System.out.println(tmp.data);
+				System.out.print(tmp.data+" ");
 				tmp = tmp.next;
 			}
+			System.out.println();
 		}
 	}
 	public Node deletefromBeginning()
@@ -73,20 +74,18 @@ public class LinkedList
 		size--;
 		return ele;
 	}
-	public int getMid()
+	public Node getMid()
 	{
 		Node slow = head;
 		Node fast = head;
-		
 		while(fast != null && fast.next != null)
 		{
 			slow = slow.next;
 			fast = fast.next.next;
 		}
-		
-		return slow.data;
+		return slow;
 	}
-	public Node reverse()
+	public Node reverse(Node head)
 	{
 		Node curr = head;
 		Node prev = null;
@@ -105,5 +104,94 @@ public class LinkedList
 	public int size()
 	{
 		return size;
+	}
+	public boolean isPal()
+	{
+		Node mid = getMid();
+		
+		Node t = reverse(mid);
+		Node h = head;
+		
+		while(h!= null && t!= null)
+		{
+			if(h.data != t.data)
+				return false;
+			h = h.next;
+			t = t.next;
+		}
+				
+		return true;
+	}
+	public Node getHead()
+	{
+		return head;
+	}
+	public Node mergeLists(Node list1, Node list2) 
+	{
+		 if(list1 == null)
+				return list2;
+			else if(list2 == null)
+				return list1;
+			
+		 	Node head, tail, p1 = list1, p2  = list2;
+			if(list1.data <= list2.data)
+			{
+				head = list1;
+				p1 = p1.next;
+			}
+			else
+			{
+				head = list2;
+				p2 = p2.next;
+			}
+			
+			tail = head;
+			
+			while(p1!= null && p2!= null)
+			{
+				if(p1.data <= p2.data)
+				{
+					tail.next = p1;
+					p1 = p1.next;
+				}
+				else
+				{
+					tail.next = p2;
+					p2 = p2.next;
+				}
+				tail = tail.next;
+			}
+			if(p1 != null)
+				tail.next = p1;
+			else if(p2 != null)
+				tail.next = p2;
+			
+			return head;
+	}
+	
+	public Node RecursiveMergeLists(Node list1, Node list2)
+	{
+		if(list1== null)
+			return list2;
+		if(list2 == null)
+			return list1;
+		
+		Node head, tmp;
+		if(list1.data <= list2.data)
+		{
+			head = list1;
+			tmp = head.next;
+			head.next = null;
+			head.next = RecursiveMergeLists(tmp, list2);
+		}
+		else
+		{
+			head = list2;
+			tmp = head.next;
+			head.next = null;
+			head.next = RecursiveMergeLists(list1, tmp);
+		}
+		
+		return head;
 	}
 }
